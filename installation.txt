@@ -92,19 +92,13 @@ Password: private key
 vào trang: Get key: https://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html để lấy key tài khoản của mình
 *Install Magento
 tạo database có tên là magento225
-vào thư mục bin chạy câu lệnh
-php magento setup:install \
+vào thư mục bin chạy câu lệnh :
 
---base-url=http://localhost/magento2/ \
-
---db-host=localhost --db-name=magento225 \
-
+php bin/magento setup:install \
+--base-url=http://localhost/magentodemo/ \
+--db-host=localhost --db-name=magentodemo \
 --db-user=root \
-
 --admin-firstname=Magento --admin-lastname=User --admin-email=user@example.com \
-
---admin-user=admin --admin-password=admin123 --language=en_US \
-
+--admin-user=admin --admin-password=admin1234 --language=en_US \
 --currency=USD --timezone=America/Chicago --cleanup-database \
-
 --sales-order-increment-prefix="ORD$" --session-save=db --use-rewrites=1
