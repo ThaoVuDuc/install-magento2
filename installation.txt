@@ -1,0 +1,110 @@
+﻿các bước cài đặt magento2 bằng composer
+đầu tiên, mọi người cài đặt xampp bản >= 7.1.3 nhé
+
+bản này đảm bảo có thể chạy được cả laravel
+
+https://www.apachefriends.org/download.html
+
+mọi người tạo 1 thư mục là xampp7
+
+để ko trùng với thư mục xampp cũ của mình
+
+ 
+
+Yêu cầu thư viện của Magento:
+
+Mở file php.ini
+
+tìm đến dòng
+
+extension_dir=
+
+kiểm tra xem nó có bị comment ko
+
+và có trỏ đến đúng thư mục ext ko?
+
+ 
+
+https://devdocs.magento.com/guides/v2.2/install-gde/system-requirements-tech.html
+
+ 
+
+Sửa cấu hình file php.ini mới
+
+tìm đến đoạn
+
+; Dynamic Extensions ;
+
+extension=php_curl.dll
+
+extension=php_gd2.dll
+
+extension=php_intl.dll
+
+extension=php_mbstring.dll
+
+extension=php_openssl.dll
+
+extension=php_pdo_mysql.dll
+
+extension=php_soap.dll
+
+extension=php_xsl.dll
+
+bỏ comment ; đằng trước
+
+ 
+
+Kiểm tra module nào đang được load:
+
+php -m
+
+ 
+
+nếu gặp lỗi:
+
+'php' is not recognized as an internal or external command,
+
+operable program or batch file.
+
+thì vào My computer -> properties -> advance system setting
+
+enviroment variable
+
+trong tab system variable tìm dòng PATH
+
+-> edit
+
+thêm đường dẫn tới thư mục php là được , ví dụ E:\xampp7\php
+
+- Vào thư mục định tạo Magento trên server
+ví dụ: E:\xampp7\htdocs\
+
+- Chạy lệnh:
+
+$ composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento2
++trong đó: magento2 là thư mục mới sẽ chứa magento2
+
+Authentication required (repo.magento.com)
+
+Username: public key
+Password: private key
+vào trang: Get key: https://devdocs.magento.com/guides/v2.0/install-gde/prereq/connect-auth.html để lấy key tài khoản của mình
+*Install Magento
+tạo database có tên là magento225
+vào thư mục bin chạy câu lệnh
+php magento setup:install \
+
+--base-url=http://localhost/magento2/ \
+
+--db-host=localhost --db-name=magento225 \
+
+--db-user=root \
+
+--admin-firstname=Magento --admin-lastname=User --admin-email=user@example.com \
+
+--admin-user=admin --admin-password=admin123 --language=en_US \
+
+--currency=USD --timezone=America/Chicago --cleanup-database \
+
+--sales-order-increment-prefix="ORD$" --session-save=db --use-rewrites=1
