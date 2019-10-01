@@ -95,10 +95,37 @@ tạo database có tên là magento225
 vào thư mục bin chạy câu lệnh :
 
 php bin/magento setup:install \
---base-url=http://localhost:8000/first_magento2_project/ \
---db-host=localhost --db-name=magento225 \
+--base-url=http://localhost:81/magento232/ \
+--db-host=localhost --db-name=magento232 \
 --db-user=root \
 --admin-firstname=Thao --admin-lastname=Vu --admin-email=vuducthao2210@gmail.com \
---admin-user=vuthao234 --admin-password=dragon2210 --language=en_US \
+--admin-user=thaovd --admin-password=thao2210 --language=en_US \
 --currency=USD --timezone=America/Chicago --cleanup-database \
 --sales-order-increment-prefix="ORD$" --session-save=db --use-rewrites=1
+
+fix lỗi bản 2.3
+/vendor/magento/framework/View/Element/Template/File/Validator.php
+dòng 139
+/*
+foreach ($directories as $directory) {
+if (0 === strpos($realPath, $directory)) {
+return true;
+}
+} */
+
+=>thay mới:
+foreach ($directories as $directory) {
+    // Add this line
+   $realDirectory = $this->fileDriver->getRealPath($directory);
+   // and replace `$directory` with `$realDirectory`
+   if (0 === strpos($realPath, $realDirectory)) {
+        return true;
+   }
+}
+
+- cài đặt sampledata
+php <your Magento install dir>/bin/magento sampledata:deploy
+-chạy câu lệnh update database và schema 
+php <your Magento install dir>/bin/magento setup:upgrade
+-sau đó chạy câu lệnh deploy
+php magento setup:static-content:deploy -f
