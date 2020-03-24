@@ -123,6 +123,10 @@ foreach ($directories as $directory) {
    }
 }
 
+Hoặc thay đổi : 
+$realPath = $this->fileDriver->getRealPath($path);
+thành : $realPath = str_replace('\\', '/', $this->fileDriver->getRealPath($path));
+
 - cài đặt sampledata
 php <your Magento install dir>/bin/magento sampledata:deploy
 -chạy câu lệnh update database và schema 
